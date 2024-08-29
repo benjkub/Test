@@ -1,0 +1,3 @@
+# Zulu 
+
+- belongs to the Bantu language family
