@@ -1,0 +1,103 @@
+---
+title: "ggplot_notes_Ben"
+author: "Ben Kubacki"
+date: "8-30-24"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#### ggplot practice
+
+textbook chapter 3: https://djvill.github.io/r4ds/data-visualisation.html
+
+#### Pre-req Load Tidyverse
+```{r 3.1 Prerequisite - load tidyverse package every time}
+library(ggplot2)
+library(tidyverse)
+
+```
+
+## 3.2 First Steps
+
+What is the relationship between engine size and fuel efficiency?
+
+My hypothesis: Intuitively, engine size could mean a more powerful engine, thus better at using fuel. Thus, a larger engine could use fuel more efficiently. However, I know from experience/general knowledge that larger and heavier duty vehicles use fuel less efficiently, and I imagine such vehicles require larger engines, so I think it's safer to guess that larger engines have lower fuel efficiency. On the graph, this would look like a line that slopes downward as engine size (x = displ) increases, meaning larger engines travel less miles per gallon (y = hwy). As miles per gallon increases (y-axis), engine size decreases.
+
+`displ` = engine size in liters
+`hwy` = efficiency in miles per gallon
+
+```{r mpg summary & scatterplot}
+ggplot2::mpg
+
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy))
+
+```
+The graph supports our hypothesis (honestly, I'd seen the graph already). Thus, it supports that fuel efficiency decreases as engine size increases; the two variables are inversely proportional. 
+
+### 3.2.3 Graphing template
+
+`ggplot(data = <DATA>) +   
+  <GEOM_FUNCTION>(mapping = aes(<MAPPINGS>))`
+  
+#### 3.2.4 Exercises
+
+1. Running `ggplot(data = mpg)` delivers a blank graph, in fact it's just a gray box.
+
+2. There are 234 rows and 11 columns in the dataset. You can use nrow/ncol or `ggplot2::mpg` to get the tibble numbers.
+
+3. `drv` is the type of drive train. `f` = front-wheel, `r` = rear-wheel, and `4` = 4wd.
+
+4. Scatterplot of x = cyl and y = hwy.
+
+5. Scatterplot of `class` vs `drv` is not very useful as as scatter because it simply describes what type of drive each class of vehicle has. So we find that SUVs may have 4- or rear-wheel drive but not front-wheel drive. A scatterplot is meant to display numeric data relationships to numeric or nominal variables, rather than compare two nominal variables.
+
+```{r 3.2.4 Exercises}
+
+# ggplot(data = mpg)
+
+nrow(mpg)
+ncol(mpg)
+ggplot2::mpg
+
+# ?mpg
+
+# scatterplot of hwy and cyl
+
+# `cyl` = number of cylinders 
+
+ggplot(data = mpg) + geom_point(mapping = aes(x = cyl, y = hwy))
+
+ggplot(data = mpg) + geom_point(mapping = aes(x = drv, y = class))
+
+
+```
+
+### 3.3 Aesthetics
+
+```{r}
+
+ggplot(data = mpg) + geom_point(mapping = aes(x = displ, y = hwy, color = class))
+
+# This suggests 2-seaters are unusually high mpg for engine size.
+
+```
+So we can use 
+
+- color
+- size
+- shape (6 variables) 
+- alpha (shading) 
+
+to display variables by aesthetic **levels**. 
+
+### 3.3.1 Exercises
+
+1. Setting a color manually for your output needs to go outside the aes() argument. The code was wrong because the `color` argument was inside the aes() argument, which led to R interpreting it as a variable with a single level called blue. This is the correction: 
+
+`ggplot(data = mpg)+geom_point(mapping=aes(x=displ, y=hwy), color = "blue")`
+
+2. Categorical variables: 
