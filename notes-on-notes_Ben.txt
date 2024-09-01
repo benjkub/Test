@@ -1,0 +1,4 @@
+# Notes on notes
+## To do 2
+
+Student A notes are nicely organized with the big headers, notes, code, and output. Student B is pretty similar, though maybe with less notes overall. Student C left out the chapter and section numbers, but the section names are still there. I like the clarity of it. However, I would want more code in the notes to refer back to, and it helps me to have code on a specific topic in a chunk together, rather than multiple small chunks, as long as it doesn't get too full. All three notes provide a helpful model. Reviewing them clarifies that I'd like to have notes that provide helpful quick reference info rather than long replications of the chapters. 
